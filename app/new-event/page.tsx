@@ -1,7 +1,8 @@
 import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
+import { RedirectType, redirect } from "next/navigation";
 import BackButton from "@/components/BackButton";
 import { SubmitButton } from "@/components/SubmitButton";
+import { error } from "console";
 
 export default async function Login({
   searchParams,
@@ -9,65 +10,68 @@ export default async function Login({
   searchParams: { message: string };
 }) {
   const supabase = createClient();
+
+  // Check if user is logged in
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) return redirect("/login");
 
+  // Adding new event
   const addEvent = async (formData: FormData) => {
     "use server";
-    const errors: string[] = [];
 
-    try {
-      const title = formData.get("title") as string;
-      const image = formData.get("image") as File;
-      const description = formData.get("description") as string;
-      const location = formData.get("location") as string;
-      const date = formData.get("date") as string;
+    const title = formData.get("title") as string;
+    const image = formData.get("image") as File;
+    const description = formData.get("description") as string;
+    const location = formData.get("location") as string;
+    const date = formData.get("date") as string;
 
-      const supabase = createClient();
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) throw new Error("You have to be logged in");
+    // Check if user is logged in
+    const supabase = createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) return redirect("/login");
 
-      const randomId = Math.random().toString(36).substring(2);
-      let extension = "";
-      const filenameParts = image.name.split(".");
-      if (filenameParts.length > 1) {
-        extension = filenameParts[filenameParts.length - 1].toLowerCase();
-      }
-      if (!["jpg", "jpeg"].includes(extension)) {
-        throw new Error("Wrong file format. Please upload a JPG file.");
-      }
-
-      const { error: uploadError } = await supabase.storage
-        .from("event-photo")
-        .upload(`public/${randomId}.${extension}`, image);
-
-      if (uploadError) {
-        throw new Error("Failed to upload image. Please try again.");
-      }
-
-      const { error: insertError } = await supabase.from("Event").insert({
-        title,
-        description,
-        location,
-        date,
-        image_url: `https://ghzfhsfaejmxwcbmjaec.supabase.co/storage/v1/object/public/event-photo/public/${randomId}.${extension}`,
-        added_by: user.id,
-      });
-
-      if (insertError) {
-        throw new Error("Failed to create event. Please try again.");
-      }
-
-      // Redirect or navigate to the desired page
-      redirect("/");
-    } catch (error) {
-      console.error(error);
-      return redirect("/new-event?message=Something went wrong");
+    // Generate random filename
+    const randomId = Math.random().toString(36).substring(2);
+    const extension = image.name.split(".").pop()?.toLowerCase();
+    if (extension && !["jpg", "jpeg"].includes(extension)) {
+      return redirect(
+        "/new-event?message=Wrong file format. Please upload a JPG file."
+      );
     }
+
+    // Upload image to storage
+    const { error: uploadError } = await supabase.storage
+      .from("event-photo")
+      .upload(`public/${randomId}.${extension}`, image);
+
+    if (uploadError) {
+      return redirect(
+        "/new-event?message=Failed to upload image. Please try again."
+      );
+    }
+
+    // Insert event to database
+    const { error: insertError } = await supabase.from("Event").insert({
+      title,
+      description,
+      location,
+      date,
+      image_url: `https://ghzfhsfaejmxwcbmjaec.supabase.co/storage/v1/object/public/event-photo/public/${randomId}.${extension}`,
+      added_by: user.id,
+    });
+
+    if (insertError) {
+      return redirect(
+        "/new-event?message=Failed to create event. Please try again."
+      );
+    }
+
+    // Everything is ok
+    return redirect("/");
   };
 
   return (

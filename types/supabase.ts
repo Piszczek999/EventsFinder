@@ -11,30 +11,44 @@ export type Database = {
     Tables: {
       Event: {
         Row: {
+          added_by: string
           created_at: string
-          date: string | null
-          description: string | null
+          date: string
+          description: string
           id: string
-          location: string | null
-          title: string | null
+          image_url: string
+          location: string
+          title: string
         }
         Insert: {
+          added_by: string
           created_at?: string
-          date?: string | null
-          description?: string | null
+          date: string
+          description: string
           id?: string
-          location?: string | null
-          title?: string | null
+          image_url: string
+          location: string
+          title: string
         }
         Update: {
+          added_by?: string
           created_at?: string
-          date?: string | null
-          description?: string | null
+          date?: string
+          description?: string
           id?: string
-          location?: string | null
-          title?: string | null
+          image_url?: string
+          location?: string
+          title?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "Event_added_by_fkey"
+            columns: ["added_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
