@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
@@ -23,7 +22,7 @@ export default function Login({
     });
 
     if (error) {
-      return redirect("/login?message=Could not authenticate user");
+      return redirect("/login?message=" + error.message);
     }
 
     return redirect("/");
@@ -46,15 +45,40 @@ export default function Login({
     });
 
     if (error) {
-      return redirect("/login?message=Could not authenticate user");
+      return redirect("/login?message=" + error.message);
     }
 
     return redirect("/login?message=Check email to continue sign in process");
   };
 
+  const signInWithGithub = async () => {
+    "use server";
+
+    const origin = headers().get("origin");
+    const supabase = createClient();
+
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        redirectTo: `${origin}/auth/callback`,
+      },
+    });
+
+    if (error) {
+      console.log(error);
+    } else {
+      return redirect(data.url);
+    }
+  };
+
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-xl justify-center gap-2">
-      <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground bg-[#F2F1EB] p-2 shadow-lg">
+      <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground bg-[#F2F1EB] p-8 shadow-lg">
+        {searchParams?.message && (
+          <p className="mt-4 p-4 bg-red-600 text-white text-center">
+            {searchParams.message}
+          </p>
+        )}
         <BackButton />
         <label className="text-md" htmlFor="email">
           Email
@@ -85,16 +109,18 @@ export default function Login({
         <SubmitButton
           formAction={signUp}
           className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-          pendingText="Signing Up..."
+          pendingText="Creating..."
         >
-          Sign Up
+          Create account
         </SubmitButton>
-        {searchParams?.message && (
-          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
-            {searchParams.message}
-          </p>
-        )}
       </form>
+      <SubmitButton
+        formAction={signInWithGithub}
+        className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
+        pendingText="Signing in..."
+      >
+        Sign in with Github
+      </SubmitButton>
     </div>
   );
 }
