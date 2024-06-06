@@ -24,7 +24,8 @@ export default async function Login({
     const title = formData.get("title") as string;
     const image = formData.get("image") as File;
     const description = formData.get("description") as string;
-    const location = formData.get("location") as string;
+    const country = formData.get("country") as string;
+    const city = formData.get("city") as string;
     const date = formData.get("date") as string;
 
     // Check if user is logged in
@@ -58,16 +59,15 @@ export default async function Login({
     const { error: insertError } = await supabase.from("Event").insert({
       title,
       description,
-      location,
+      country,
+      city,
       date,
       image_url: `https://ghzfhsfaejmxwcbmjaec.supabase.co/storage/v1/object/public/event-photo/public/${randomId}.${extension}`,
       added_by: user.id,
     });
 
     if (insertError) {
-      return redirect(
-        "/new-event?message=Failed to create event. Please try again."
-      );
+      return redirect("/new-event?message=" + insertError.message);
     }
 
     // Everything is ok
@@ -94,7 +94,7 @@ export default async function Login({
           required
         />
         <label className="text-md" htmlFor="image">
-          Image (.jpg file)
+          Image (.jpg file, max 50 MB)
         </label>
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
@@ -113,13 +113,23 @@ export default async function Login({
           required
         />
         <label className="text-md" htmlFor="location">
-          Location
+          Country
         </label>
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
           type="text"
-          name="location"
-          placeholder="Mennica 10, 85-112 Bydgoszcz"
+          name="country"
+          placeholder="Polska"
+          required
+        />
+        <label className="text-md" htmlFor="location">
+          City
+        </label>
+        <input
+          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          type="text"
+          name="city"
+          placeholder="Bydgoszcz"
           required
         />
         <label className="text-md" htmlFor="date">

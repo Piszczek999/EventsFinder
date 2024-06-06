@@ -12,32 +12,35 @@ export type Database = {
       Event: {
         Row: {
           added_by: string
+          city: string
+          country: string | null
           created_at: string
           date: string
           description: string
           id: string
           image_url: string
-          location: string
           title: string
         }
         Insert: {
           added_by: string
+          city: string
+          country?: string | null
           created_at?: string
           date: string
           description: string
           id?: string
           image_url: string
-          location: string
           title: string
         }
         Update: {
           added_by?: string
+          city?: string
+          country?: string | null
           created_at?: string
           date?: string
           description?: string
           id?: string
           image_url?: string
-          location?: string
           title?: string
         }
         Relationships: [
