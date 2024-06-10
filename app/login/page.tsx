@@ -78,29 +78,34 @@ export default function Login({
   return (
     <div className="animate-in flex-1 flex flex-col w-full bg-[#F2F1EB] shadow-lg p-8 sm:max-w-md justify-center gap-4">
       <BackButton />
+
+      {/* Github */}
       <form className="flex flex-col items-center">
-        <SubmitButton
+        <button
           formAction={signInWithGithub}
           className="border border-black rounded-md px-4 py-2 mb-2 flex items-center text-center bg-[#F2F1EB] font-semibold gap-2 hover:invert hover:scale-105 transition"
-          pendingText="Signing in..."
         >
           <Icon icon="github" />
           Sign in with Github
-        </SubmitButton>
+        </button>
       </form>
 
+      {/* --lub-- */}
       <div className="relative flex items-center justify-center">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-black"></div>
         </div>
-        <div className="relative px-3 bg-[#F2F1EB] text-gray-600">OR</div>
+        <div className="relative px-3 bg-[#F2F1EB] text-gray-600">lub</div>
       </div>
 
+      {/* errors */}
       {searchParams?.message && (
         <p className="animate-in mt-4 p-4 bg-red-600 text-white text-center">
           {searchParams.message}
         </p>
       )}
+
+      {/* credentials */}
       <form className=" flex flex-col w-full justify-center gap-2">
         <label className="text-md" htmlFor="email">
           Email
@@ -112,7 +117,7 @@ export default function Login({
           required
         />
         <label className="text-md" htmlFor="password">
-          Password
+          Hasło
         </label>
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
@@ -124,16 +129,16 @@ export default function Login({
         <SubmitButton
           formAction={signIn}
           className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2 text-white hover:scale-105 transition"
-          pendingText="Signing In..."
+          pendingText="Logowanie..."
         >
-          Sign In
+          Zaloguj
         </SubmitButton>
         <SubmitButton
           formAction={signUp}
           className=" bg-blue-500 rounded-md px-4 py-2 text-foreground mb-2 text-white hover:scale-105 transition"
-          pendingText="Creating..."
+          pendingText="Tworzenie..."
         >
-          Create account
+          Utwórz konto
         </SubmitButton>
       </form>
     </div>

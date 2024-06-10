@@ -1,6 +1,13 @@
 import { Event } from "@/types";
+import { useRouter } from "next/navigation";
 
 export default function EventTile({ event }: { event: Event }) {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/events/${event.id}`);
+  };
+
   const tileStyle = {
     backgroundImage: `url(${event.image_url})`,
     backgroundSize: "cover",
@@ -13,7 +20,10 @@ export default function EventTile({ event }: { event: Event }) {
   );
 
   return (
-    <button className="border-[#E8DFCA] border-b-2 h-[200px] opacity-0 animate-in bg-[#F5EFE6] shadow-lg relative overflow-hidden">
+    <button
+      onClick={handleClick}
+      className="border-[#E8DFCA] border-b-2 h-[200px] opacity-0 animate-in bg-[#F5EFE6] shadow-lg relative overflow-hidden"
+    >
       <div style={tileStyle} className="absolute inset-0" />
       <div className="absolute right-0 top-0 bg-[#1A4D2E] bg-opacity-70 p-1 rounded-full text-white">
         {"za " + daysFromNow + " dni"}

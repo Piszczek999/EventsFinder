@@ -21,7 +21,7 @@ export default function SearchBar({
         name="text"
         className="flex-1 rounded-full bg-transparent text-xl p-2 w-full outline-none"
         autoComplete="off"
-        placeholder="Search..."
+        placeholder="Szukaj..."
       />
       <button type="submit" className="h-11 w-11 p-1 bg-[#1A4D2E] rounded-full">
         <Icon icon="search" />

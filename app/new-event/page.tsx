@@ -84,17 +84,17 @@ export default async function Login({
           </p>
         )}
         <label className="text-md" htmlFor="title">
-          Title
+          Tytuł
         </label>
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
           type="text"
           name="title"
-          placeholder="example title"
+          placeholder="Przykładowy tytuł"
           required
         />
         <label className="text-md" htmlFor="image">
-          Image (.jpg file, max 50 MB)
+          Zdjęcie (plik .jpg, max 50 MB)
         </label>
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
@@ -104,16 +104,16 @@ export default async function Login({
           required
         />
         <label className="text-md" htmlFor="description">
-          Description
+          Opis
         </label>
         <textarea
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
           name="description"
-          placeholder="event description"
+          placeholder="Opis wydarzenia"
           required
         />
         <label className="text-md" htmlFor="location">
-          Country
+          Kraj
         </label>
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
@@ -123,7 +123,7 @@ export default async function Login({
           required
         />
         <label className="text-md" htmlFor="location">
-          City
+          Miasto
         </label>
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
@@ -133,7 +133,7 @@ export default async function Login({
           required
         />
         <label className="text-md" htmlFor="date">
-          Date
+          Data rozpoczęcia
         </label>
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
@@ -145,9 +145,9 @@ export default async function Login({
         <SubmitButton
           formAction={addEvent}
           className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2 text-white"
-          pendingText="Sending..."
+          pendingText="Zapisywanie..."
         >
-          Submit
+          Zapisz
         </SubmitButton>
       </form>
     </div>
