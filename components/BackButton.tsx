@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function BackButton() {
   return (
     <Link
-      href="/"
+      href="/events"
       className="py-2 px-4 rounded-md no-underline text-foreground bg-btn-background flex items-center group text-sm"
     >
       <svg

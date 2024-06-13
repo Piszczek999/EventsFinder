@@ -3,11 +3,15 @@
 @tailwind utilities;
 
 body {
-  background-color: #e8dfca;
+  background-color: #eff2f5;
 }
 
 .animate-in {
   animation: animateIn 0.3s ease 0.15s both;
+}
+
+.animate-delay-500 {
+  animation-delay: 500ms;
 }
 
 @keyframes animateIn {
@@ -19,4 +23,48 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.tile {
+  background: linear-gradient(135deg, #6f8efa, #a677e3);
+  border-radius: 10px;
+}
+
+.tile-reverse {
+  background: linear-gradient(315deg, #6f8efa, #a677e3);
+  border-radius: 10px;
+}
+
+.text-gradient {
+  background: -webkit-linear-gradient(135deg, #6f8efa, #a677e3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.search-container {
+  position: relative;
+  display: inline-block;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="search"]::-ms-clear {
+  display: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.scroller {
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+.scroller section {
+  scroll-snap-align: start;
 }

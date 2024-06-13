@@ -22,13 +22,13 @@ export default function EventTile({ event }: { event: Event }) {
   return (
     <button
       onClick={handleClick}
-      className="border-[#E8DFCA] border-b-2 h-[200px] opacity-0 animate-in bg-[#F5EFE6] shadow-lg relative overflow-hidden"
+      className="h-[200px] animate-in shadow relative overflow-hidden rounded-[10px]"
     >
       <div style={tileStyle} className="absolute inset-0" />
-      <div className="absolute right-0 top-0 bg-[#1A4D2E] bg-opacity-70 p-1 rounded-full text-white">
+      <div className="absolute right-1 top-1 bg-black bg-opacity-60 p-1 rounded-full text-white">
         {"za " + daysFromNow + " dni"}
       </div>
-      <div className="bg-[#1A4D2E] bg-opacity-70 top-[75%] absolute inset-0 text-white">
+      <div className="bg-black bg-opacity-60 top-[75%] absolute inset-0 text-white">
         <p className="text-center">{event.title}</p>
       </div>
     </button>

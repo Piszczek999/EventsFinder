@@ -3,12 +3,10 @@ import AuthButton from "./AuthButton";
 
 export default async function Navbar() {
   return (
-    <nav className="flex items-center justify-between bg-[#1A4D2E] text-white p-2 shadow-lg">
-      <div>
-        <Link href={"/"} className="font-medium">
-          EventsFinder
-        </Link>
-      </div>
+    <nav className="fixed top-0 z-10 flex w-full bg-inherit items-center justify-between text-white px-4 p-2 shadow">
+      <Link href={"/"} className="tile px-2 p-1">
+        <div className="text-2xl font-medium">EventFinder</div>
+      </Link>
       <AuthButton />
     </nav>
   );

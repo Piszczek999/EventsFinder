@@ -25,7 +25,10 @@ export default async function AuthButton() {
       </form>
     </div>
   ) : (
-    <Link href="/login" className="py-2 px-3 flex rounded-md no-underline">
+    <Link
+      href="/login"
+      className="py-2 px-3 flex rounded-md no-underline text-[#333333]"
+    >
       Zaloguj
     </Link>
   );

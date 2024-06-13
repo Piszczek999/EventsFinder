@@ -1,8 +1,7 @@
-import { createClient } from "@/utils/supabase/server";
-import { RedirectType, redirect } from "next/navigation";
 import BackButton from "@/components/BackButton";
 import { SubmitButton } from "@/components/SubmitButton";
-import { error } from "console";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
 export default async function Login({
   searchParams,
