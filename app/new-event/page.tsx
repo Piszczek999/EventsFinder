@@ -165,7 +165,7 @@ export default async function Login({
         </div>
         <SubmitButton
           formAction={addEvent}
-          className="tile px-4 py-2 text-white font-medium"
+          className="tile px-4 py-2 text-white font-medium hover:opacity-90"
           pendingText="Zapisywanie..."
         >
           Zapisz

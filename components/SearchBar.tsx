@@ -23,7 +23,10 @@ export default function SearchBar({ onSubmit }: Props) {
         autoComplete="off"
         placeholder="Szukaj..."
       />
-      <button type="submit" className="min-h-11 min-w-11 p-1 bg-[#333333]">
+      <button
+        type="submit"
+        className="min-h-11 min-w-11 p-1 bg-[#333333] hover:opacity-90"
+      >
         <Icon icon="search" />
       </button>
     </form>

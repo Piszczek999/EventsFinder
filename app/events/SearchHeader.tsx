@@ -14,14 +14,14 @@ export default function SearchHeader({ onSearch, onFilterClick }: Props) {
       <div className="flex justify-center p-2 gap-4 items-center">
         <SearchBar onSubmit={onSearch} />
         <button
-          className="bg-[#333333] items-center rounded p-2 min-w-11 min-h-11"
+          className="bg-[#333333] items-center rounded p-2 min-w-11 min-h-11 hover:opacity-90"
           onClick={onFilterClick}
         >
           <Icon icon="filter" />
         </button>
         <Link
           href={"/new-event"}
-          className="bg-[#333333] items-center rounded p-2 min-w-11 min-h-11"
+          className="bg-[#333333] items-center rounded p-2 min-w-11 min-h-11 hover:opacity-90"
         >
           <Icon icon="plus" />
         </Link>

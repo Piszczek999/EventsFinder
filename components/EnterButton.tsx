@@ -62,26 +62,28 @@ export default function EnterButton({
   return isEntered ? (
     <button
       {...props}
-      className={`text-white px-2 w-[120px] rounded transition ${
-        isHovered ? "bg-red-600" : "bg-green-600"
+      className={`text-[#333] px-2 w-[120px] rounded-[10px] ${
+        isHovered ? "bg-red-500" : "bg-[#80d184]"
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleEventSignOut}
     >
-      <p className="text-lg">{isHovered ? "Wypisz się" : "Zapisano"}</p>
+      <p className="text-lg font-medium">
+        {isHovered ? "Wypisz się" : "Zapisano"}
+      </p>
     </button>
   ) : (
     <button
       {...props}
-      className={`text-white px-2 w-[120px] rounded ${
-        isHovered ? "bg-green-600" : "bg-gradient"
+      className={`text-white px-2 w-[120px] rounded-[10px] ${
+        isHovered ? "bg-gradient" : "bg-gradient saturate-50"
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleEventSignUp}
     >
-      <p className="text-lg">Zapisz się</p>
+      <p className="text-lg font-medium">Zapisz się</p>
     </button>
   );
 }

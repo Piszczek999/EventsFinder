@@ -11,6 +11,7 @@ export default function EventsScreen() {
   const [eventList, setEventList] = useState<Event[]>([]);
   const [enteredEvents, setEnteredEvents] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<FilterInputs>({
     city: "",
@@ -19,6 +20,16 @@ export default function EventsScreen() {
     to: "",
   });
   const supabase = createClient();
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user) setIsLogged(true);
+    };
+    checkUser();
+  }, [supabase]);
 
   useEffect(() => {
     const getData = async () => await handleSearch("");
@@ -41,7 +52,9 @@ export default function EventsScreen() {
       .order("date");
     if (data) setEventList(data);
 
-    const user = (await supabase.auth.getUser()).data.user;
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     if (user) {
       const { data: enters } = await supabase
         .from("Enters")
@@ -71,6 +84,7 @@ export default function EventsScreen() {
               key={event.id}
               event={event}
               isEntered={enteredEvents.includes(event.id)}
+              isLogged={isLogged}
             />
           ))}
         </div>

@@ -2,13 +2,13 @@ import { Event } from "@/types";
 import { useRouter } from "next/navigation";
 import EnterButton from "./EnterButton";
 
-export default function EventTile({
-  event,
-  isEntered,
-}: {
+type Props = {
   event: Event;
   isEntered: boolean;
-}) {
+  isLogged: boolean;
+};
+
+export default function EventTile({ event, isEntered, isLogged }: Props) {
   const router = useRouter();
 
   const handleClick = () => {
@@ -21,12 +21,9 @@ export default function EventTile({
     backgroundPosition: "center",
   };
 
-  const daysFromNow = Math.ceil(
-    Math.ceil(
-      Math.ceil(new Date(event.date).getTime() / (1000 * 3600 * 24)) -
-        Math.ceil(new Date().getTime() / (1000 * 3600 * 24))
-    )
-  );
+  const daysFromNow =
+    Math.ceil(new Date(event.date).getTime() / (1000 * 3600 * 24)) -
+    Math.ceil(new Date().getTime() / (1000 * 3600 * 24));
 
   return (
     <div
@@ -35,7 +32,7 @@ export default function EventTile({
     >
       <div
         style={tileStyle}
-        className="absolute inset-0 group-hover:opacity-80"
+        className="absolute inset-0 group-hover:opacity-90"
       />
       <div
         className={`absolute right-1 top-1 ${
@@ -52,10 +49,12 @@ export default function EventTile({
           ? "wczoraj"
           : -daysFromNow + " dni temu"}
       </div>
-      <div className="absolute left-1 top-1 z-10">
-        <EnterButton initialState={isEntered} eventId={event.id} />
-      </div>
-      <div className="bg-black bg-opacity-60 top-[70%] absolute inset-0 text-white group-hover:opacity-80">
+      {isLogged && (
+        <div className="absolute left-1 top-1 z-10">
+          <EnterButton initialState={isEntered} eventId={event.id} />
+        </div>
+      )}
+      <div className="bg-black bg-opacity-60 top-[70%] absolute inset-0 text-white group-hover:opacity-90">
         <p className="text-center text-lg">{event.title}</p>
       </div>
     </div>

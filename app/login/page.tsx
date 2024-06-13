@@ -137,14 +137,14 @@ export default function Login({
           />
           <SubmitButton
             formAction={signIn}
-            className="tile px-4 py-2 mb-2 text-white mt-5"
+            className="tile px-4 py-2 mb-2 text-white mt-5 hover:opacity-90"
             pendingText="Logowanie..."
           >
             Zaloguj
           </SubmitButton>
           <SubmitButton
             formAction={signUp}
-            className="tile-reverse px-4 py-2 mb-2 text-white"
+            className="tile-reverse px-4 py-2 mb-2 text-white hover:opacity-90"
             pendingText="Tworzenie..."
           >
             Utwórz konto

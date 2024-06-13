@@ -52,7 +52,7 @@ export default async function page({ params }: { params: { id: string } }) {
           </div>
           <EventSigningButton
             eventId={event.id}
-            className="p-2 rounded-[10px] font-medium text-xl shadow"
+            className="p-2 rounded-[10px] font-medium text-xl shadow hover:opacity-90"
           />
         </div>
       </div>

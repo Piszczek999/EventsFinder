@@ -83,7 +83,7 @@ export default function EventSigningButton({
     return (
       <button
         {...props}
-        className={"bg-white text-[#333] " + className}
+        className={"bg-[#80d184] text-[#333] " + className}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleEventSignOut}

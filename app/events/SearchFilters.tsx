@@ -47,7 +47,7 @@ export default function SearchFilters({ setFilters }: Props) {
         </div>
         <button
           type="submit"
-          className="tile text-white p-2 font-medium shadow"
+          className="tile text-white p-2 font-medium shadow hover:opacity-90"
         >
           Filtruj
         </button>
