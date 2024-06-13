@@ -2,9 +2,7 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+const defaultUrl = `https://eventsfinder.vercel.app`;
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
