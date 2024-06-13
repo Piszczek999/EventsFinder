@@ -1,6 +1,6 @@
 .search-container {
   position: relative;
-  display: inline-block;
+  display: flex;
 }
 
 .clear-button {

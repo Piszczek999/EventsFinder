@@ -1,12 +1,11 @@
 "use client";
 
 import EventTile from "@/components/EventTile";
-import { Event } from "@/types";
+import { Event, FilterInputs } from "@/types";
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
 import SearchHeader from "./SearchHeader";
 import SearchFilters from "./SearchFilters";
-import { FilterInputs } from "@/utils/types";
 
 export default function EventsScreen() {
   const [eventList, setEventList] = useState<Event[]>([]);
@@ -15,6 +14,8 @@ export default function EventsScreen() {
   const [filters, setFilters] = useState<FilterInputs>({
     city: "",
     country: "",
+    from: "",
+    to: "",
   });
   const supabase = createClient();
 
@@ -31,7 +32,11 @@ export default function EventsScreen() {
       .ilike("title", `%${searchInput}%`)
       .ilike("country", `%${filters.country}%`)
       .ilike("city", `%${filters.city}%`)
-      .gte("date", new Date().toISOString())
+      .gte(
+        "date",
+        filters.from ? filters.from : new Date().toISOString().slice(0, 10)
+      )
+      .lte("date", filters.to ? filters.to : "9999-12-12")
       .order("date");
     if (data) setEventList(data);
     setIsLoading(false);

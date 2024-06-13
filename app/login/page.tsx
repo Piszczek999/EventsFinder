@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "../../components/SubmitButton";
+import SearchInput from "@/components/SearchInput";
 
 export default function Login({
   searchParams,
@@ -76,71 +77,79 @@ export default function Login({
   };
 
   return (
-    <div className="animate-in flex-1 flex flex-col w-full bg-[#F2F1EB] shadow-lg p-8 sm:max-w-md justify-center gap-4">
-      <BackButton />
-
-      {/* Github */}
-      <form className="flex flex-col items-center">
-        <button
-          formAction={signInWithGithub}
-          className="border border-black rounded-md px-4 py-2 mb-2 flex items-center text-center bg-[#F2F1EB] font-semibold gap-2 hover:invert hover:scale-105 transition"
-        >
-          <Icon icon="github" />
-          Sign in with Github
-        </button>
-      </form>
-
-      {/* --lub-- */}
-      <div className="relative flex items-center justify-center">
-        <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-black"></div>
-        </div>
-        <div className="relative px-3 bg-[#F2F1EB] text-gray-600">lub</div>
+    <div className="flex flex-col w-full sm:max-w-xl justify-center gap-2 mt-4">
+      <div className="tile p-2 shadow">
+        <h1 className="text-white text-4xl font-bold p-2 text-center">
+          Logowanie
+        </h1>
       </div>
 
-      {/* errors */}
-      {searchParams?.message && (
-        <p className="animate-in mt-4 p-4 bg-red-600 text-white text-center">
-          {searchParams.message}
-        </p>
-      )}
+      <div className="animate-in flex flex-col w-full bg-white shadow p-8 justify-center gap-4 mt-4 rounded-[10px]">
+        <BackButton />
 
-      {/* credentials */}
-      <form className=" flex flex-col w-full justify-center gap-2">
-        <label className="text-md" htmlFor="email">
-          Email
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          name="email"
-          placeholder="you@example.com"
-          required
-        />
-        <label className="text-md" htmlFor="password">
-          Hasło
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          type="password"
-          name="password"
-          placeholder="••••••••"
-          required
-        />
-        <SubmitButton
-          formAction={signIn}
-          className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2 text-white hover:scale-105 transition"
-          pendingText="Logowanie..."
-        >
-          Zaloguj
-        </SubmitButton>
-        <SubmitButton
-          formAction={signUp}
-          className=" bg-blue-500 rounded-md px-4 py-2 text-foreground mb-2 text-white hover:scale-105 transition"
-          pendingText="Tworzenie..."
-        >
-          Utwórz konto
-        </SubmitButton>
-      </form>
+        {/* Github */}
+        <form className="flex flex-col items-center">
+          <button
+            formAction={signInWithGithub}
+            className="rounded-md px-4 py-2 mb-2 flex items-center text-center bg-white shadow font-semibold gap-2 invert"
+          >
+            <Icon icon="github" />
+            Sign in with Github
+          </button>
+        </form>
+
+        {/* --lub-- */}
+        <div className="relative flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-[#333]"></div>
+          </div>
+          <div className="relative px-3 bg-white text-gray-600">lub</div>
+        </div>
+
+        {/* errors */}
+        {searchParams?.message && (
+          <p className="animate-in mt-4 p-4 bg-red-600 text-white text-center">
+            {searchParams.message}
+          </p>
+        )}
+
+        {/* credentials */}
+        <form className="flex flex-col w-full justify-center gap-2">
+          <label className="text-md" htmlFor="email">
+            Email
+          </label>
+          <SearchInput
+            className="rounded-md px-4 py-2 shadow"
+            name="email"
+            placeholder="you@example.com"
+            required
+          />
+          <label className="text-md" htmlFor="password">
+            Hasło
+          </label>
+          <SearchInput
+            className="rounded-md px-4 py-2 shadow"
+            type="password"
+            name="password"
+            placeholder="••••••••"
+            required
+          />
+          <SubmitButton
+            formAction={signIn}
+            className="tile px-4 py-2 mb-2 text-white mt-5"
+            pendingText="Logowanie..."
+          >
+            Zaloguj
+          </SubmitButton>
+          <SubmitButton
+            formAction={signUp}
+            className="tile-reverse px-4 py-2 mb-2 text-white"
+            pendingText="Tworzenie..."
+          >
+            Utwórz konto
+          </SubmitButton>
+        </form>
+      </div>
     </div>
   );
 }

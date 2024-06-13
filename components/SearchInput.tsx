@@ -21,12 +21,12 @@ export default function SearchInput({ className, ...props }: Props) {
       <input
         {...props}
         type="search"
-        className={"pr-6 " + className}
+        className={"pr-6 w-full " + className}
         value={value}
         onChange={handleChange}
       />
       {value && (
-        <button className="clear-button" onClick={clearSearch}>
+        <button type="button" className="clear-button" onClick={clearSearch}>
           ✖
         </button>
       )}

@@ -1,4 +1,5 @@
 import BackButton from "@/components/BackButton";
+import SearchInput from "@/components/SearchInput";
 import { SubmitButton } from "@/components/SubmitButton";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
@@ -74,76 +75,91 @@ export default async function Login({
   };
 
   return (
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-xl justify-center gap-2">
-      <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground bg-[#F2F1EB] p-2 shadow-lg">
+    <div className="flex flex-col w-full px-8 sm:max-w-xl justify-center gap-2 mt-4">
+      <div className="tile p-2 shadow">
+        <h1 className="text-white text-4xl font-bold p-2 text-center">
+          Tworzenie Wydarzenia
+        </h1>
+      </div>
+
+      <form className="animate-in flex flex-col w-full justify-center gap-8 bg-white text-[#333] p-4 rounded-[10px] shadow">
         <BackButton />
         {searchParams?.message && (
           <p className="mt-4 p-4 text-center bg-red-700 text-white">
             {searchParams.message}
           </p>
         )}
-        <label className="text-md" htmlFor="title">
-          Tytuł
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          type="text"
-          name="title"
-          placeholder="Przykładowy tytuł"
-          required
-        />
-        <label className="text-md" htmlFor="image">
-          Zdjęcie (plik .jpg, max 50 MB)
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          type="file"
-          name="image"
-          accept="image/jpeg"
-          required
-        />
-        <label className="text-md" htmlFor="description">
-          Opis
-        </label>
-        <textarea
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          name="description"
-          placeholder="Opis wydarzenia"
-          required
-        />
-        <label className="text-md" htmlFor="location">
-          Kraj
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          type="text"
-          name="country"
-          placeholder="Polska"
-          required
-        />
-        <label className="text-md" htmlFor="location">
-          Miasto
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          type="text"
-          name="city"
-          placeholder="Bydgoszcz"
-          required
-        />
-        <label className="text-md" htmlFor="date">
-          Data rozpoczęcia
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          type="datetime-local"
-          name="date"
-          min={new Date().toISOString().slice(0, -8)}
-          required
-        />
+        <div className="flex flex-col gap-2">
+          <label className="text-md" htmlFor="title">
+            Tytuł
+          </label>
+          <SearchInput
+            className="rounded-md px-4 py-2 shadow"
+            name="title"
+            placeholder="Przykładowy tytuł"
+            required
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label className="text-md" htmlFor="image">
+            Zdjęcie (plik .jpg, max 50 MB)
+          </label>
+          <input
+            className="rounded-md px-4 py-2 shadow"
+            type="file"
+            name="image"
+            accept="image/jpeg"
+            required
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label className="text-md" htmlFor="description">
+            Opis
+          </label>
+          <textarea
+            className="rounded-md px-4 py-2 shadow"
+            name="description"
+            placeholder="Opis wydarzenia"
+            required
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label className="text-md" htmlFor="location">
+            Kraj
+          </label>
+          <SearchInput
+            className="rounded-md px-4 py-2 shadow"
+            name="country"
+            placeholder="Polska"
+            required
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label className="text-md" htmlFor="location">
+            Miasto
+          </label>
+          <SearchInput
+            className="rounded-md px-4 py-2 shadow"
+            name="city"
+            placeholder="Bydgoszcz"
+            required
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label className="text-md" htmlFor="date">
+            Data rozpoczęcia
+          </label>
+          <input
+            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            type="datetime-local"
+            name="date"
+            min={new Date().toISOString().slice(0, -8)}
+            required
+          />
+        </div>
         <SubmitButton
           formAction={addEvent}
-          className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2 text-white"
+          className="tile px-4 py-2 text-foreground mb-2 text-white font-medium"
           pendingText="Zapisywanie..."
         >
           Zapisz

@@ -4,10 +4,10 @@ export default function Home() {
   return (
     <div className="flex-1 flex flex-col items-center max-w-[80vw]">
       <section className="animate-in flex flex-col items-center pt-[20vh] py-[15vh]">
-        <h1 className="text-[5vw] text-gradient font-bold text-center">
+        <h1 className="text-[max(5vw,36px)] text-gradient font-bold text-center">
           Witamy w EventFinder!
         </h1>
-        <h2 className="text-[2vw] text-[#333333] font-medium text-center">
+        <h2 className="text-[max(2vw,20px)] text-[#333333] font-medium text-center">
           Odkryj najciekawsze wydarzenia rozrywkowe w Twojej okolicy!
         </h2>
         <Link
