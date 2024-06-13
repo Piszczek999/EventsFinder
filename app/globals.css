@@ -10,6 +10,10 @@ body {
   animation: animateIn 0.3s ease 0.15s both;
 }
 
+.animate-down {
+  animation: animateDown 0.3s ease 0s both;
+}
+
 .animate-delay-500 {
   animation-delay: 500ms;
 }
@@ -23,6 +27,25 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes animateDown {
+  from {
+    z-index: -1;
+    transform: translateY(-100px);
+  }
+  to {
+    z-index: -1;
+    transform: translateY(0);
+  }
+}
+
+.bg-gradient {
+  background: linear-gradient(135deg, #6f8efa, #a677e3);
+}
+
+.bg-gradient-reverse {
+  background: linear-gradient(315deg, #6f8efa, #a677e3);
 }
 
 .tile {

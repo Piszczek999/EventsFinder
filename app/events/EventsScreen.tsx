@@ -1,7 +1,7 @@
 "use client";
 
 import EventTile from "@/components/EventTile";
-import { Event, FilterInputs } from "@/types";
+import { Enter, Event, FilterInputs } from "@/types";
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
 import SearchHeader from "./SearchHeader";
@@ -9,6 +9,7 @@ import SearchFilters from "./SearchFilters";
 
 export default function EventsScreen() {
   const [eventList, setEventList] = useState<Event[]>([]);
+  const [enteredEvents, setEnteredEvents] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<FilterInputs>({
@@ -39,6 +40,16 @@ export default function EventsScreen() {
       .lte("date", filters.to ? filters.to : "9999-12-12")
       .order("date");
     if (data) setEventList(data);
+
+    const user = (await supabase.auth.getUser()).data.user;
+    if (user) {
+      const { data: enters } = await supabase
+        .from("Enters")
+        .select("event_id")
+        .eq("user_id", user.id);
+      if (enters) setEnteredEvents(enters.map((enter) => enter.event_id));
+    }
+
     setIsLoading(false);
   };
 
@@ -56,7 +67,11 @@ export default function EventsScreen() {
       ) : eventList.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full bg-[#F5EFE6] gap-1">
           {eventList.map((event) => (
-            <EventTile key={event.id} event={event} />
+            <EventTile
+              key={event.id}
+              event={event}
+              isEntered={enteredEvents.includes(event.id)}
+            />
           ))}
         </div>
       ) : (

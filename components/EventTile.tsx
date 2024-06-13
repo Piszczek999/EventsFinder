@@ -1,7 +1,14 @@
 import { Event } from "@/types";
 import { useRouter } from "next/navigation";
+import EnterButton from "./EnterButton";
 
-export default function EventTile({ event }: { event: Event }) {
+export default function EventTile({
+  event,
+  isEntered,
+}: {
+  event: Event;
+  isEntered: boolean;
+}) {
   const router = useRouter();
 
   const handleClick = () => {
@@ -22,11 +29,14 @@ export default function EventTile({ event }: { event: Event }) {
   );
 
   return (
-    <button
+    <div
       onClick={handleClick}
-      className="h-[200px] animate-in shadow relative overflow-hidden rounded-[10px]"
+      className="group h-[200px] animate-in shadow relative overflow-hidden rounded-[10px] cursor-pointer"
     >
-      <div style={tileStyle} className="absolute inset-0" />
+      <div
+        style={tileStyle}
+        className="absolute inset-0 group-hover:opacity-80"
+      />
       <div
         className={`absolute right-1 top-1 ${
           daysFromNow >= 0 ? "bg-black" : "bg-red-600"
@@ -42,9 +52,12 @@ export default function EventTile({ event }: { event: Event }) {
           ? "wczoraj"
           : -daysFromNow + " dni temu"}
       </div>
-      <div className="bg-black bg-opacity-60 top-[75%] absolute inset-0 text-white">
-        <p className="text-center">{event.title}</p>
+      <div className="absolute left-1 top-1 z-10">
+        <EnterButton initialState={isEntered} eventId={event.id} />
       </div>
-    </button>
+      <div className="bg-black bg-opacity-60 top-[70%] absolute inset-0 text-white group-hover:opacity-80">
+        <p className="text-center text-lg">{event.title}</p>
+      </div>
+    </div>
   );
 }

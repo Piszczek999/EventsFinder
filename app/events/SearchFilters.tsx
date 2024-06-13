@@ -1,6 +1,5 @@
 "use client";
 
-import Icon from "@/components/Icon";
 import SearchInput from "@/components/SearchInput";
 import { FilterInputs } from "@/types";
 
@@ -19,7 +18,7 @@ export default function SearchFilters({ setFilters }: Props) {
   };
 
   return (
-    <div className="flex p-2 rounded-[10px] shadow bg-white justify-center">
+    <div className="animate-down flex p-2 rounded-[10px] shadow bg-white justify-center">
       <form action={handleSubmit} className="flex flex-col md:flex-row gap-4">
         <SearchInput
           name="country"

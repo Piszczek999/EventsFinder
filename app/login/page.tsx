@@ -67,8 +67,6 @@ export default function Login({
       },
     });
 
-    console.log(data);
-
     if (error) {
       console.log(error);
     } else {
@@ -77,14 +75,14 @@ export default function Login({
   };
 
   return (
-    <div className="flex flex-col w-full sm:max-w-xl justify-center gap-2 mt-4">
-      <div className="tile p-2 shadow">
+    <div className="flex flex-col w-full sm:max-w-xl mt-4 gap-4">
+      <div className="animate-in tile p-2 shadow">
         <h1 className="text-white text-4xl font-bold p-2 text-center">
           Logowanie
         </h1>
       </div>
 
-      <div className="animate-in flex flex-col w-full bg-white shadow p-8 justify-center gap-4 mt-4 rounded-[10px]">
+      <div className="animate-in animate-delay-500 flex flex-col w-full bg-white shadow p-8 justify-center gap-4 rounded-[10px]">
         <BackButton />
 
         {/* Github */}
@@ -120,7 +118,9 @@ export default function Login({
           </label>
           <SearchInput
             className="rounded-md px-4 py-2 shadow"
+            type="email"
             name="email"
+            id="email"
             placeholder="you@example.com"
             required
           />
@@ -131,6 +131,7 @@ export default function Login({
             className="rounded-md px-4 py-2 shadow"
             type="password"
             name="password"
+            id="password"
             placeholder="••••••••"
             required
           />

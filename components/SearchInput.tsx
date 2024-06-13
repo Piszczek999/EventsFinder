@@ -20,7 +20,6 @@ export default function SearchInput({ className, ...props }: Props) {
     <div className="search-container">
       <input
         {...props}
-        type="search"
         className={"pr-6 w-full " + className}
         value={value}
         onChange={handleChange}

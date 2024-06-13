@@ -75,14 +75,14 @@ export default async function Login({
   };
 
   return (
-    <div className="flex flex-col w-full px-8 sm:max-w-xl justify-center gap-2 mt-4">
-      <div className="tile p-2 shadow">
+    <div className="flex flex-col w-full sm:max-w-xl gap-2 mt-4">
+      <div className="animate-in tile p-2 shadow">
         <h1 className="text-white text-4xl font-bold p-2 text-center">
           Tworzenie Wydarzenia
         </h1>
       </div>
 
-      <form className="animate-in flex flex-col w-full justify-center gap-8 bg-white text-[#333] p-4 rounded-[10px] shadow">
+      <form className="animate-in animate-delay-500 flex flex-col w-full gap-8 bg-white text-[#333] p-4 rounded-[10px] shadow">
         <BackButton />
         {searchParams?.message && (
           <p className="mt-4 p-4 text-center bg-red-700 text-white">
@@ -96,6 +96,7 @@ export default async function Login({
           <SearchInput
             className="rounded-md px-4 py-2 shadow"
             name="title"
+            id="title"
             placeholder="Przykładowy tytuł"
             required
           />
@@ -108,6 +109,7 @@ export default async function Login({
             className="rounded-md px-4 py-2 shadow"
             type="file"
             name="image"
+            id="image"
             accept="image/jpeg"
             required
           />
@@ -119,28 +121,31 @@ export default async function Login({
           <textarea
             className="rounded-md px-4 py-2 shadow"
             name="description"
+            id="description"
             placeholder="Opis wydarzenia"
             required
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label className="text-md" htmlFor="location">
+          <label className="text-md" htmlFor="country">
             Kraj
           </label>
           <SearchInput
             className="rounded-md px-4 py-2 shadow"
             name="country"
+            id="country"
             placeholder="Polska"
             required
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label className="text-md" htmlFor="location">
+          <label className="text-md" htmlFor="city">
             Miasto
           </label>
           <SearchInput
             className="rounded-md px-4 py-2 shadow"
             name="city"
+            id="city"
             placeholder="Bydgoszcz"
             required
           />
@@ -150,16 +155,17 @@ export default async function Login({
             Data rozpoczęcia
           </label>
           <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            className="rounded-md px-4 py-2 shadow"
             type="datetime-local"
             name="date"
+            id="date"
             min={new Date().toISOString().slice(0, -8)}
             required
           />
         </div>
         <SubmitButton
           formAction={addEvent}
-          className="tile px-4 py-2 text-foreground mb-2 text-white font-medium"
+          className="tile px-4 py-2 text-white font-medium"
           pendingText="Zapisywanie..."
         >
           Zapisz
