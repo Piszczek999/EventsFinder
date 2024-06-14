@@ -64,7 +64,7 @@ export default async function page({ params }: { params: { id: string } }) {
         </p>
       </div>
 
-      <div className="animate-in p-4 shadow bg-[#333] rounded text-white">
+      <div className="animate-in p-4 shadow bg-white rounded text-[#333]">
         <h2 className="text-2xl font-bold">Szczegóły</h2>
         <p className="text-sm">
           <strong>Utworzono:</strong>{" "}

@@ -54,8 +54,11 @@ export default function EventTile({ event, isEntered, isLogged }: Props) {
           <EnterButton initialState={isEntered} eventId={event.id} />
         </div>
       )}
+      <div className="absolute left-0 top-[54%] z-10 bg-black bg-opacity-60 p-1 rounded-tr-full font-medium text-white px-3">
+        <p>{event.city}</p>
+      </div>
       <div className="bg-black bg-opacity-60 top-[70%] absolute inset-0 text-white group-hover:opacity-90">
-        <p className="text-center text-lg">{event.title}</p>
+        <p className=" text-lg px-3">{event.title}</p>
       </div>
     </div>
   );

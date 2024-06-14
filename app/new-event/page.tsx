@@ -3,6 +3,7 @@ import SearchInput from "@/components/SearchInput";
 import { SubmitButton } from "@/components/SubmitButton";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import FileSelector from "./FileSelector";
 
 export default async function Login({
   searchParams,
@@ -105,14 +106,7 @@ export default async function Login({
           <label className="text-md" htmlFor="image">
             Zdjęcie (plik .jpg, max 50 MB)
           </label>
-          <input
-            className="rounded-md px-4 py-2 shadow"
-            type="file"
-            name="image"
-            id="image"
-            accept="image/jpeg"
-            required
-          />
+          <FileSelector />
         </div>
         <div className="flex flex-col gap-2">
           <label className="text-md" htmlFor="description">

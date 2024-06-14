@@ -62,7 +62,7 @@ export default function EnterButton({
   return isEntered ? (
     <button
       {...props}
-      className={`text-[#333] px-2 w-[120px] rounded-[10px] ${
+      className={`text-white px-2 w-[120px] rounded-[10px] ${
         isHovered ? "bg-red-500" : "bg-[#80d184]"
       }`}
       onMouseEnter={() => setIsHovered(true)}

@@ -24,7 +24,7 @@ export default function Login({
     });
 
     if (error) {
-      return redirect("/login?message=" + error.message);
+      return redirect("/login?message=" + error.status);
     }
 
     return redirect("/");
@@ -106,7 +106,9 @@ export default function Login({
         {/* errors */}
         {searchParams?.message && (
           <p className="animate-in mt-4 p-4 bg-red-600 text-white text-center">
-            {searchParams.message}
+            {searchParams.message === "400"
+              ? "Nieprawidłowe dane logowanie"
+              : "Wystąpił nieoczekiwany błąd"}
           </p>
         )}
 
