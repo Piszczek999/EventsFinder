@@ -41,7 +41,7 @@ export default async function page({ params }: { params: { id: string } }) {
             </div>
             <div className="text-lg">
               <strong>Godzina:</strong>
-              <p>{new Date(event.date).toLocaleTimeString().slice(0, 5)}</p>
+              <p>{new Date(event.date).toLocaleTimeString().slice(0, -3)}</p>
             </div>
             <div className="text-lg">
               <strong>Miejsce:</strong>
