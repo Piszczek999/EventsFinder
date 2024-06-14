@@ -76,7 +76,9 @@ export default function EventsScreen() {
       {showFilters && <SearchFilters setFilters={setFilters} />}
 
       {isLoading ? (
-        <p className="text-center p-2">Loading...</p>
+        <div className="flex flex-col w-full flex-1 justify-center items-center h-screen">
+          <div className="loader"></div>
+        </div>
       ) : eventList.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full bg-[#F5EFE6] gap-1">
           {eventList.map((event) => (
