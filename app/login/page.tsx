@@ -90,7 +90,7 @@ export default function Login({
             formAction={signInWithGithub}
             className="rounded-md px-4 py-2 mb-2 flex items-center text-center bg-white shadow font-semibold gap-2 invert"
           >
-            <Icon icon="github" />
+            <Icon icon="github" height={30} />
             Sign in with Github
           </button>
         </form>

@@ -1,11 +1,11 @@
 "use client";
 
 import EventTile from "@/components/EventTile";
-import { Enter, Event, FilterInputs } from "@/types";
+import { Event, FilterInputs } from "@/types";
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
-import SearchHeader from "./SearchHeader";
 import SearchFilters from "./SearchFilters";
+import SearchHeader from "./SearchHeader";
 
 export default function EventsScreen() {
   const [eventList, setEventList] = useState<Event[]>([]);
@@ -80,7 +80,7 @@ export default function EventsScreen() {
           <div className="loader"></div>
         </div>
       ) : eventList.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full bg-[#F5EFE6] gap-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full bg-white gap-1 shadow rounded-[10px]">
           {eventList.map((event) => (
             <EventTile
               key={event.id}
