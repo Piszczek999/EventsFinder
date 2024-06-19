@@ -37,15 +37,15 @@ export default async function Login({
     if (!user) return redirect("/login");
 
     // Generate random filename
-    const randomId = Math.random().toString(36).substring(2);
     const extension = image.name.split(".").pop()?.toLowerCase();
-    if (extension && !["jpg", "jpeg"].includes(extension)) {
+    if (extension && !["jpg", "jpeg", "png"].includes(extension)) {
       return redirect(
         "/new-event?message=Wrong file format. Please upload a JPG file."
       );
     }
 
     // Upload image to storage
+    const randomId = Math.random().toString(36).substring(2);
     const { error: uploadError } = await supabase.storage
       .from("event-photo")
       .upload(`public/${randomId}.${extension}`, image);
@@ -83,7 +83,10 @@ export default async function Login({
         </h1>
       </div>
 
-      <form className="animate-in animate-delay-500 flex flex-col w-full gap-8 bg-white text-[#333] p-4 rounded-[10px] shadow">
+      <form
+        className="animate-in animate-delay-500 flex flex-col w-full gap-8 bg-white text-[#333] p-4 rounded-[10px] shadow"
+        action={addEvent}
+      >
         <BackButton />
         {searchParams?.message && (
           <p className="mt-4 p-4 text-center bg-red-700 text-white">
@@ -104,7 +107,7 @@ export default async function Login({
         </div>
         <div className="flex flex-col gap-2">
           <label className="text-md" htmlFor="image">
-            Zdjęcie (plik .jpg, max 50 MB)
+            Zdjęcie (max 50 MB, PNG, JPG)
           </label>
           <FileSelector />
         </div>
@@ -158,7 +161,6 @@ export default async function Login({
           />
         </div>
         <SubmitButton
-          formAction={addEvent}
           className="tile px-4 py-2 text-white font-medium hover:opacity-90"
           pendingText="Zapisywanie..."
         >

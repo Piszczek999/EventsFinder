@@ -1,6 +1,7 @@
 "use client";
 
 import { createClient } from "@/utils/supabase/client";
+import { useRouter } from "next/navigation";
 import { ComponentProps, MouseEvent, useEffect, useState } from "react";
 
 type Props = ComponentProps<"button"> & { eventId: string };
@@ -13,7 +14,9 @@ export default function EventSigningButton({
   const [isHovered, setIsHovered] = useState(false);
   const [isEntered, setIsEntered] = useState(false);
   const [isPending, setIsPending] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
   const supabase = createClient();
+  const router = useRouter();
 
   useEffect(() => {
     const load = async () => {
@@ -21,12 +24,15 @@ export default function EventSigningButton({
         data: { user },
       } = await supabase.auth.getUser();
       if (user) {
+        setIsLogged(true);
         const { data } = await supabase
           .from("Enters")
           .select()
           .eq("user_id", user.id)
           .eq("event_id", eventId);
         if (data && data.length > 0) setIsEntered(true);
+      } else {
+        setIsLogged(false);
       }
     };
     load();
@@ -79,11 +85,23 @@ export default function EventSigningButton({
     setIsPending(false);
   };
 
+  if (!isLogged)
+    return (
+      <button
+        {...props}
+        className={"bg-gradient text-white " + className}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={() => router.push("/login")}
+      >
+        Zaloguj się, aby się zapisać
+      </button>
+    );
   if (isEntered)
     return (
       <button
         {...props}
-        className={"bg-[#80d184] text-[#333] " + className}
+        className={"bg-[#5aaa5e] text-white " + className}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleEventSignOut}

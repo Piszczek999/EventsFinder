@@ -21,8 +21,8 @@ export default async function page({ params }: { params: { id: string } }) {
         </h1>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="animate-in shadow rounded-[10px] h-full">
+      <div className="animate-in grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="shadow rounded-[10px] h-full">
           <img
             src={event.image_url}
             alt={event.title}
@@ -30,7 +30,7 @@ export default async function page({ params }: { params: { id: string } }) {
           />
         </div>
         <div className="flex flex-col flex-1 gap-2">
-          <div className="animate-in p-4 shadow rounded-[10px] bg-white text-[#333] flex flex-col justify-between grow">
+          <div className="p-4 shadow rounded-[10px] bg-white text-[#333] flex flex-col justify-between grow">
             <div className="text-lg">
               <strong>Tytuł:</strong>
               <p>{event.title}</p>
@@ -58,10 +58,10 @@ export default async function page({ params }: { params: { id: string } }) {
       </div>
 
       <div className="animate-in p-4 shadow rounded-[10px] bg-white text-[#333] flex flex-col justify-between">
-        <p className="text-lg">
+        <div className="text-lg">
           <strong>Opis:</strong>
           <p className="">{event.description}</p>
-        </p>
+        </div>
       </div>
 
       <div className="animate-in p-4 shadow bg-white rounded text-[#333]">

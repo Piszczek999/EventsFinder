@@ -11,7 +11,7 @@ export default function FileSelector() {
         type="file"
         name="image"
         id="image"
-        accept="image/jpeg"
+        accept="image/*"
         required
         onChange={(e) =>
           setFileName(
